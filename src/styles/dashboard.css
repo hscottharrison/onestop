@@ -1,0 +1,14 @@
+*{
+  margin: 0;
+}
+
+.dashboard-group{
+  height: 300px;
+  border: 1px solid black;
+  padding: 0;
+}
+
+.list-group{
+  height: 260px;
+  overflow-y: scroll;
+}
