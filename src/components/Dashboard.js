@@ -11,29 +11,52 @@ export default class Dashboard extends Component {
     super(props);
 
     this.state = {
-      listValues: [],
-      inputValue: ''
+      todoListValues: [],
+      packingListValues: [],
+      todoInputValue: '',
+      packingInputValue: ''
     }
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onInputSubmit = this.onInputSubmit.bind(this);
+    this.onTodoChange = this.onInputChange.bind(this, 'todoInputValue');
+    this.onPackingChange = this.onInputChange.bind(this, 'packingInputValue');
+    this.onTodoSubmit = this.onTodoSubmit.bind(this);
+    this.onPackingSubmit = this.onPackingSubmit.bind(this);
   }
 
-  onInputChange(e){
-    this.setState({inputValue: e.target.value})
+  onInputChange(value, e){
+    this.setState({[value]: e.target.value})
     console.log(this.state.inputValue)
   }
 
-  onInputSubmit(e){
+  onTodoSubmit(e){
     e.preventDefault();
     this.setState({
-      listValues: [...this.state.listValues, this.state.inputValue, ],
+      todoListValues: [...this.state.todoListValues, this.state.inputValue],
+      inputValue: ''
+    })
+  }
+
+  onPackingSubmit(e){
+    e.preventDefault();
+    this.setState({
+      packingListValues: [...this.state.packingListValues, this.state.inputValue],
       inputValue: ''
     })
   }
 
   render(){
 
-    const listItems = this.state.listValues.map((item, index) => {
+    const todoListItems = this.state.todoListValues.map((item, index) => {
+      return (
+        <div>
+          <ListItem
+            key={index}
+            classes={'col-lg-12 list-group-item'}
+            value={item}/>
+        </div>
+      )
+    })
+
+    const packingListItems = this.state.packingListValues.map((item, index) => {
       return (
         <div>
           <ListItem
@@ -47,15 +70,26 @@ export default class Dashboard extends Component {
     return(
       <div>
         <h1>Dashboard</h1>
-        <ListGroup
-          listItems={listItems}
-          value={this.state.inputValue}
-          onChange={this.onInputChange}
-          formClass={'list-input'}
-          classes={'col-lg-12'}
-          submit={this.onInputSubmit}
-          placeholder={'Add ToDo Item...'}/>
-          
+        <div className='row dashboard-list-container'>
+          <ListGroup
+            listItems={todoListItems}
+            value={this.state.inputValue}
+            onChange={this.onTodoChange}
+            formClass={'list-input'}
+            classes={'col-lg-12'}
+            submit={this.onTodoSubmit}
+            placeholder={'Add ToDo Item...'}/>
+            
+          <ListGroup
+            listItems={packingListItems}
+            value={this.state.inputValue}
+            onChange={this.onPackingChange}
+            formClass={'list-input'}
+            classes={'col-lg-12'}
+            submit={this.onPackingSubmit}
+            placeholder={'Add ToDo Item...'}/>
+        </div>
+
       </div>
     )
   }

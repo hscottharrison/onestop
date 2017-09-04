@@ -18,6 +18,4 @@ export default function ListGroup (props) {
           placeholder={props.placeholder}/>
       </div>
     )
-
-
 }

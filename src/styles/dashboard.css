@@ -3,12 +3,18 @@
 }
 
 .dashboard-group{
-  height: 300px;
+  height: 400px;
   border: 1px solid black;
   padding: 0;
 }
 
 .list-group{
-  height: 260px;
+  height: 360px;
   overflow-y: scroll;
+}
+
+.dashboard-list-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
